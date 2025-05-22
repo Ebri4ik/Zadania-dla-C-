@@ -1,0 +1,149 @@
+using System;
+
+class Program
+{
+    static void Zadanie1()
+    {
+        Console.WriteLine("Prosty kalkulator dwóch liczb");
+        Console.Write("Podaj pierwszą liczbę: ");
+        double a = Convert.ToDouble(Console.ReadLine());
+        Console.Write("Podaj drugą liczbę: ");
+        double b = Convert.ToDouble(Console.ReadLine());
+        Console.Write("Wybierz operację (+, -, *, /): ");
+        string op = Console.ReadLine();
+        
+        double wynik = 0;
+        bool blad = false;
+        
+        switch (op)
+        {
+            case "+":
+                wynik = a + b;
+                break;
+            case "-":
+                wynik = a - b;
+                break;
+            case "*":
+                wynik = a * b;
+                break;
+            case "/":
+                if (b == 0)
+                {
+                    Console.WriteLine("Błąd: dzielenie przez zero!");
+                    blad = true;
+                }
+                else
+                {
+                    wynik = a / b;
+                }
+                break;
+            default:
+                Console.WriteLine("Nieznana operacja!");
+                blad = true;
+                break;
+        }
+        
+        if (!blad)
+        {
+            Console.WriteLine($"Wynik: {wynik}");
+        }
+    }
+
+    static void Zadanie2()
+    {
+        Console.WriteLine("Konwerter temperatur (Celsjusz ↔ Fahrenheit)");
+        Console.Write("Wybierz kierunek konwersji (C - Celsjusz na Fahrenheit, F - Fahrenheit na Celsjusz): ");
+        string kierunek = Console.ReadLine().ToUpper();
+        
+        if (kierunek == "C")
+        {
+            Console.Write("Podaj temperaturę w stopniach Celsjusza: ");
+            double c = Convert.ToDouble(Console.ReadLine());
+            double f = c * 1.8 + 32;
+            Console.WriteLine($"{c}°C = {f}°F");
+        }
+        else if (kierunek == "F")
+        {
+            Console.Write("Podaj temperaturę w stopniach Fahrenheita: ");
+            double f = Convert.ToDouble(Console.ReadLine());
+            double c = (f - 32) / 1.8;
+            Console.WriteLine($"{f}°F = {c}°C");
+        }
+        else
+        {
+            Console.WriteLine("Nieznany kierunek konwersji!");
+        }
+    }
+
+    static void Zadanie3()
+    {
+        Console.WriteLine("Średnia ocen ucznia");
+        Console.Write("Podaj liczbę ocen: ");
+        int n = Convert.ToInt32(Console.ReadLine());
+        
+        if (n <= 0)
+        {
+            Console.WriteLine("Liczba ocen musi być większa od 0!");
+            return;
+        }
+        
+        double suma = 0;
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write($"Podaj ocenę {i + 1}: ");
+            double ocena = Convert.ToDouble(Console.ReadLine());
+            
+            if (ocena < 1 || ocena > 6)
+            {
+                Console.WriteLine("Ocena musi być w zakresie 1-6!");
+                return;
+            }
+            
+            suma += ocena;
+        }
+        
+        double srednia = suma / n;
+        Console.WriteLine($"Średnia: {srednia:F2}");
+        if (srednia >= 3.0)
+        {
+            Console.WriteLine("Uczeń zdał.");
+        }
+        else
+        {
+            Console.WriteLine("Uczeń nie zdał.");
+        }
+    }
+
+    static void Main(string[] args)
+    {
+        while (true)
+        {
+            Console.WriteLine("\nMenu:");
+            Console.WriteLine("1. Prosty kalkulator dwóch liczb");
+            Console.WriteLine("2. Konwerter temperatur");
+            Console.WriteLine("3. Średnia ocen ucznia");
+            Console.WriteLine("4. Wyjście");
+            
+            Console.Write("Wybierz zadanie (1-4): ");
+            string wybor = Console.ReadLine();
+            
+            switch (wybor)
+            {
+                case "1":
+                    Zadanie1();
+                    break;
+                case "2":
+                    Zadanie2();
+                    break;
+                case "3":
+                    Zadanie3();
+                    break;
+                case "4":
+                    return;
+                default:
+                    Console.WriteLine("Nieprawidłowy wybór!");
+                    break;
+            }
+        }
+    }
+}
